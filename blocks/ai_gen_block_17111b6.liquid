@@ -1,0 +1,363 @@
+{% doc %}
+  @prompt
+    Create a masonry grid for testimonials. Need a field for the testimonial and a separate field for the name. Allow each tile to have a background, with border radius, padding and border color., The row height should be auto
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-testimonial-masonry-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+  }
+
+  .ai-testimonial-masonry__grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+    gap: {{ block.settings.gap }}px;
+    grid-auto-rows: auto;
+  }
+
+  .ai-testimonial-masonry__item-{{ ai_gen_id }} {
+    background-color: {{ block.settings.tile_background }};
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    padding: {{ block.settings.padding }}px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+    transition: transform 0.2s ease;
+  }
+
+  .ai-testimonial-masonry__item-{{ ai_gen_id }}:nth-child(3n + 1) {
+    grid-row: span 2;
+  }
+
+  .ai-testimonial-masonry__item-{{ ai_gen_id }}:nth-child(3n + 2) {
+    grid-row: span 3;
+  }
+
+  .ai-testimonial-masonry__item-{{ ai_gen_id }}:nth-child(3n + 3) {
+    grid-row: span 2;
+  }
+
+  .ai-testimonial-masonry__text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.text_size }}px;
+    line-height: 1.5;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-testimonial-masonry__author-{{ ai_gen_id }} {
+    font-size: {{ block.settings.author_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.author_color }};
+    margin-top: auto;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-testimonial-masonry__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+    }
+  }
+{% endstyle %}
+
+<testimonial-masonry-{{ ai_gen_id }} class="ai-testimonial-masonry-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-testimonial-masonry__grid-{{ ai_gen_id }}">
+    {% for i in (1..6) %}
+      {% liquid
+        assign testimonial_key = 'testimonial_' | append: i
+        assign author_key = 'author_' | append: i
+        assign testimonial = block.settings[testimonial_key]
+        assign author = block.settings[author_key]
+      %}
+      
+      {% if testimonial != blank or author != blank %}
+        <div class="ai-testimonial-masonry__item-{{ ai_gen_id }}">
+          {% if testimonial != blank %}
+            <div class="ai-testimonial-masonry__text-{{ ai_gen_id }}">
+              {{ testimonial }}
+            </div>
+          {% endif %}
+          {% if author != blank %}
+            <div class="ai-testimonial-masonry__author-{{ ai_gen_id }}">
+              {{ author }}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</testimonial-masonry-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class TestimonialMasonry{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.adjustMasonryLayout();
+        window.addEventListener('resize', () => this.adjustMasonryLayout());
+      }
+
+      adjustMasonryLayout() {
+        const items = this.querySelectorAll('.ai-testimonial-masonry__item-{{ ai_gen_id }}');
+        items.forEach((item, index) => {
+          const pattern = index % 3;
+          if (pattern === 0) {
+            item.style.gridRow = 'span 2';
+          } else if (pattern === 1) {
+            item.style.gridRow = 'span 3';
+          } else {
+            item.style.gridRow = 'span 2';
+          }
+        });
+      }
+    }
+
+    customElements.define('testimonial-masonry-{{ ai_gen_id }}', TestimonialMasonry{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Testimonial masonry",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between tiles",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Tile style"
+    },
+    {
+      "type": "color",
+      "id": "tile_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Padding",
+      "min": 12,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Testimonial text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Testimonial text color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "author_size",
+      "label": "Author text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "author_color",
+      "label": "Author text color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 1"
+    },
+    {
+      "type": "textarea",
+      "id": "testimonial_1",
+      "label": "Testimonial",
+      "default": "This product changed my life! Highly recommend to anyone looking for quality."
+    },
+    {
+      "type": "text",
+      "id": "author_1",
+      "label": "Author name",
+      "default": "Sarah M."
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 2"
+    },
+    {
+      "type": "textarea",
+      "id": "testimonial_2",
+      "label": "Testimonial",
+      "default": "Amazing customer service and fast shipping. The quality exceeded my expectations."
+    },
+    {
+      "type": "text",
+      "id": "author_2",
+      "label": "Author name",
+      "default": "John D."
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 3"
+    },
+    {
+      "type": "textarea",
+      "id": "testimonial_3",
+      "label": "Testimonial",
+      "default": "Best purchase I've made this year. Worth every penny!"
+    },
+    {
+      "type": "text",
+      "id": "author_3",
+      "label": "Author name",
+      "default": "Emily R."
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 4"
+    },
+    {
+      "type": "textarea",
+      "id": "testimonial_4",
+      "label": "Testimonial",
+      "default": "I was skeptical at first, but this completely won me over. Five stars!"
+    },
+    {
+      "type": "text",
+      "id": "author_4",
+      "label": "Author name",
+      "default": "Michael T."
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 5"
+    },
+    {
+      "type": "textarea",
+      "id": "testimonial_5",
+      "label": "Testimonial",
+      "default": "Fantastic quality and great value. Will definitely be ordering again."
+    },
+    {
+      "type": "text",
+      "id": "author_5",
+      "label": "Author name",
+      "default": "Lisa K."
+    },
+    {
+      "type": "header",
+      "content": "Testimonial 6"
+    },
+    {
+      "type": "textarea",
+      "id": "testimonial_6",
+      "label": "Testimonial",
+      "default": "Exceeded all my expectations. Couldn't be happier with my purchase!"
+    },
+    {
+      "type": "text",
+      "id": "author_6",
+      "label": "Author name",
+      "default": "David P."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonial masonry"
+    }
+  ]
+}
+{% endschema %}

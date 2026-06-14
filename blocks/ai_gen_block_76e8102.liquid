@@ -1,0 +1,413 @@
+{% doc %}
+  @prompt
+    Need an image carousel, Need to be able to show multiple images in a single view, The images should be able to be auto sized, fill, fit and auto are the image settings, The image grid should have up to 6 columsn
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-image-grid-{{ ai_gen_id }} {
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .ai-image-grid-container-{{ ai_gen_id }} {
+    display: grid;
+    gap: {{ block.settings.gap }}px;
+    {% if block.settings.layout == 'grid' %}
+      grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+    {% elsif block.settings.layout == 'masonry' %}
+      grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+      grid-auto-rows: {{ block.settings.masonry_row_height }}px;
+    {% endif %}
+  }
+
+  .ai-image-grid-item-{{ ai_gen_id }} {
+    position: relative;
+    overflow: hidden;
+    border-radius: {{ block.settings.border_radius }}px;
+    {% if block.settings.layout == 'masonry' %}
+      grid-row: span var(--ai-row-span-{{ ai_gen_id }});
+    {% endif %}
+  }
+
+  .ai-image-grid-item-{{ ai_gen_id }} img {
+    width: 100%;
+    display: block;
+    transition: transform 0.3s ease;
+    {% if block.settings.image_fit == 'cover' %}
+      height: 100%;
+      object-fit: cover;
+    {% elsif block.settings.image_fit == 'contain' %}
+      height: 100%;
+      object-fit: contain;
+    {% elsif block.settings.image_fit == 'auto' %}
+      height: auto;
+      object-fit: none;
+    {% endif %}
+  }
+
+  {% if block.settings.hover_effect == 'zoom' %}
+    .ai-image-grid-item-{{ ai_gen_id }}:hover img {
+      transform: scale(1.05);
+    }
+  {% elsif block.settings.hover_effect == 'lift' %}
+    .ai-image-grid-item-{{ ai_gen_id }} {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .ai-image-grid-item-{{ ai_gen_id }}:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+  {% endif %}
+
+  .ai-image-grid-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: {{ block.settings.image_height }}px;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-image-grid-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  .ai-image-grid-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  {% if block.settings.layout == 'grid' and block.settings.image_fit != 'auto' %}
+    .ai-image-grid-item-{{ ai_gen_id }} img {
+      height: {{ block.settings.image_height }}px;
+    }
+  {% endif %}
+
+  @media screen and (max-width: 749px) {
+    .ai-image-grid-container-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+      gap: {{ block.settings.gap_mobile }}px;
+      {% if block.settings.layout == 'masonry' %}
+        grid-auto-rows: {{ block.settings.masonry_row_height_mobile }}px;
+      {% endif %}
+    }
+
+    {% if block.settings.layout == 'grid' and block.settings.image_fit != 'auto' %}
+      .ai-image-grid-item-{{ ai_gen_id }} img {
+        height: {{ block.settings.image_height_mobile }}px;
+      }
+    {% endif %}
+
+    .ai-image-grid-placeholder-{{ ai_gen_id }} {
+      height: {{ block.settings.image_height_mobile }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-image-grid-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-image-grid-container-{{ ai_gen_id }}">
+    {% liquid
+      assign has_images = false
+      for i in (1..8)
+        assign image_key = 'image_' | append: i
+        assign image = block.settings[image_key]
+        if image != blank
+          assign has_images = true
+          break
+        endif
+      endfor
+    %}
+
+    {% if has_images %}
+      {% for i in (1..8) %}
+        {% liquid
+          assign image_key = 'image_' | append: i
+          assign image = block.settings[image_key]
+        %}
+        
+        {% if image != blank %}
+          {% liquid
+            if block.settings.layout == 'masonry'
+              assign aspect_ratio = image.aspect_ratio
+              if aspect_ratio > 1.5
+                assign row_span = 2
+              elsif aspect_ratio < 0.7
+                assign row_span = 4
+              else
+                assign row_span = 3
+              endif
+            else
+              assign row_span = 1
+            endif
+          %}
+          
+          <div 
+            class="ai-image-grid-item-{{ ai_gen_id }}"
+            style="--ai-row-span-{{ ai_gen_id }}: {{ row_span }};"
+          >
+            <img
+              src="{{ image | image_url: width: 1000 }}"
+              alt="{{ image.alt | escape }}"
+              loading="lazy"
+              width="{{ image.width }}"
+              height="{{ image.height }}"
+            >
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      <div class="ai-image-grid-placeholder-{{ ai_gen_id }}">
+        {{ 'image' | placeholder_svg_tag }}
+        <div class="ai-image-grid-empty-state-{{ ai_gen_id }}">
+          Next, add images to the grid
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Image grid",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout style",
+      "options": [
+        {
+          "value": "grid",
+          "label": "Grid"
+        },
+        {
+          "value": "masonry",
+          "label": "Masonry"
+        }
+      ],
+      "default": "grid"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Desktop gap",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Mobile gap",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Image 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_5",
+      "label": "Image 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_6",
+      "label": "Image 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_7",
+      "label": "Image 7"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_8",
+      "label": "Image 8"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image fit",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Fill"
+        },
+        {
+          "value": "contain",
+          "label": "Fit"
+        },
+        {
+          "value": "auto",
+          "label": "Auto"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "label": "Desktop image height",
+      "min": 100,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "image_height_mobile",
+      "label": "Mobile image height",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 200
+    },
+    {
+      "type": "range",
+      "id": "masonry_row_height",
+      "label": "Masonry row height (desktop)",
+      "min": 50,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "masonry_row_height_mobile",
+      "label": "Masonry row height (mobile)",
+      "min": 30,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "hover_effect",
+      "label": "Hover effect",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "zoom",
+          "label": "Zoom"
+        },
+        {
+          "value": "lift",
+          "label": "Lift"
+        }
+      ],
+      "default": "zoom"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image grid"
+    }
+  ]
+}
+{% endschema %}

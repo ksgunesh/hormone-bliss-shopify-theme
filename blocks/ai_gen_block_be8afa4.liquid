@@ -1,0 +1,953 @@
+{% doc %}
+  @prompt
+    Want to create an Icon Grid where the grid can be from 1 to 6 columns, each tile should have an icon, title and description. Can have up to 24 tiles. Tiles should have the ability to add a border and background with padding and gap
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-icon-grid-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+  }
+
+  .ai-icon-grid__container-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+  }
+
+  .ai-icon-grid__tile-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    align-items: {{ block.settings.tile_alignment }};
+    text-align: {{ block.settings.tile_text_alignment }};
+    padding: {{ block.settings.tile_padding }}px;
+    background-color: {{ block.settings.tile_background_color }};
+    border-radius: {{ block.settings.tile_border_radius }}px;
+    {% if block.settings.show_tile_border %}
+      border: {{ block.settings.tile_border_width }}px solid {{ block.settings.tile_border_color }};
+    {% endif %}
+  }
+
+  .ai-icon-grid__icon-wrapper-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    margin-bottom: {{ block.settings.icon_spacing }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-icon-grid__icon-wrapper-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    fill: {{ block.settings.icon_color }};
+  }
+
+  .ai-icon-grid__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: {{ block.settings.title_weight }};
+    color: {{ block.settings.title_color }};
+    margin: 0 0 {{ block.settings.title_spacing }}px 0;
+  }
+
+  .ai-icon-grid__description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.description_size }}px;
+    color: {{ block.settings.description_color }};
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-icon-grid__container-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+    }
+  }
+{% endstyle %}
+
+<icon-grid-{{ ai_gen_id }} class="ai-icon-grid-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-icon-grid__container-{{ ai_gen_id }}">
+    {% for i in (1..24) %}
+      {% liquid
+        assign tile_enabled_key = 'tile_' | append: i | append: '_enabled'
+        assign tile_icon_key = 'tile_' | append: i | append: '_icon'
+        assign tile_title_key = 'tile_' | append: i | append: '_title'
+        assign tile_description_key = 'tile_' | append: i | append: '_description'
+
+        assign tile_enabled = block.settings[tile_enabled_key]
+        assign tile_icon = block.settings[tile_icon_key]
+        assign tile_title = block.settings[tile_title_key]
+        assign tile_description = block.settings[tile_description_key]
+      %}
+
+      {% if tile_enabled %}
+        <div class="ai-icon-grid__tile-{{ ai_gen_id }}">
+          {% if tile_icon %}
+            <div class="ai-icon-grid__icon-wrapper-{{ ai_gen_id }}">
+              <img
+                src="{{ tile_icon | image_url: width: 200 }}"
+                alt="{{ tile_title | escape }}"
+                loading="lazy"
+                width="{{ block.settings.icon_size }}"
+                height="{{ block.settings.icon_size }}"
+              >
+            </div>
+          {% endif %}
+
+          {% if tile_title != blank %}
+            <h3 class="ai-icon-grid__title-{{ ai_gen_id }}">{{ tile_title }}</h3>
+          {% endif %}
+
+          {% if tile_description != blank %}
+            <p class="ai-icon-grid__description-{{ ai_gen_id }}">{{ tile_description }}</p>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</icon-grid-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class IconGrid{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.style.display = 'block';
+      }
+    }
+
+    customElements.define('icon-grid-{{ ai_gen_id }}', IconGrid{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Icon grid",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Gap between tiles",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Tile style"
+    },
+    {
+      "type": "select",
+      "id": "tile_alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "tile_text_alignment",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "tile_padding",
+      "label": "Padding",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "tile_background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "tile_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tile_border",
+      "label": "Show border",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "tile_border_width",
+      "label": "Border width",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "tile_border_color",
+      "label": "Border color",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Size",
+      "min": 20,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "icon_spacing",
+      "label": "Spacing below icon",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Title"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Size",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "title_weight",
+      "label": "Weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "title_spacing",
+      "label": "Spacing below title",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Description"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Color",
+      "default": "#4d4743"
+    },
+    {
+      "type": "header",
+      "content": "Tile 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_1_enabled",
+      "label": "Enable tile 1",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_1_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_1_title",
+      "label": "Title",
+      "default": "Feature title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_1_description",
+      "label": "Description",
+      "default": "Share details about your feature here"
+    },
+    {
+      "type": "header",
+      "content": "Tile 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_2_enabled",
+      "label": "Enable tile 2",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_2_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_2_title",
+      "label": "Title",
+      "default": "Feature title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_2_description",
+      "label": "Description",
+      "default": "Share details about your feature here"
+    },
+    {
+      "type": "header",
+      "content": "Tile 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_3_enabled",
+      "label": "Enable tile 3",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_3_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_3_title",
+      "label": "Title",
+      "default": "Feature title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_3_description",
+      "label": "Description",
+      "default": "Share details about your feature here"
+    },
+    {
+      "type": "header",
+      "content": "Tile 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_4_enabled",
+      "label": "Enable tile 4",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_4_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_4_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_4_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Tile 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_5_enabled",
+      "label": "Enable tile 5",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_5_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_5_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_5_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Tile 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_6_enabled",
+      "label": "Enable tile 6",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_6_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_6_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_6_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Tile 7"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_7_enabled",
+      "label": "Enable tile 7",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_7_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_7_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_7_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Tile 8"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_8_enabled",
+      "label": "Enable tile 8",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_8_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_8_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_8_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Tile 9"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_9_enabled",
+      "label": "Enable tile 9",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_9_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_9_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_9_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Tile 10"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_10_enabled",
+      "label": "Enable tile 10",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_10_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_10_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_10_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Tile 11"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_11_enabled",
+      "label": "Enable tile 11",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_11_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_11_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_11_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Tile 12"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_12_enabled",
+      "label": "Enable tile 12",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_12_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_12_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_12_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Tile 13"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_13_enabled",
+      "label": "Enable tile 13",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_13_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_13_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_13_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Tile 14"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_14_enabled",
+      "label": "Enable tile 14",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_14_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_14_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_14_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Tile 15"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_15_enabled",
+      "label": "Enable tile 15",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_15_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_15_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_15_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Tile 16"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_16_enabled",
+      "label": "Enable tile 16",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_16_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_16_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_16_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Tile 17"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_17_enabled",
+      "label": "Enable tile 17",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_17_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_17_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_17_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Tile 18"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_18_enabled",
+      "label": "Enable tile 18",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_18_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_18_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_18_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Tile 19"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_19_enabled",
+      "label": "Enable tile 19",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_19_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_19_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_19_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Tile 20"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_20_enabled",
+      "label": "Enable tile 20",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_20_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_20_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_20_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Tile 21"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_21_enabled",
+      "label": "Enable tile 21",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_21_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_21_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_21_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Tile 22"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_22_enabled",
+      "label": "Enable tile 22",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_22_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_22_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_22_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Tile 23"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_23_enabled",
+      "label": "Enable tile 23",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_23_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_23_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_23_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Tile 24"
+    },
+    {
+      "type": "checkbox",
+      "id": "tile_24_enabled",
+      "label": "Enable tile 24",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tile_24_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tile_24_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "tile_24_description",
+      "label": "Description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon grid"
+    }
+  ]
+}
+{% endschema %}

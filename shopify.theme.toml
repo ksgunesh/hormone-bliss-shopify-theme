@@ -1,0 +1,2 @@
+    [environments.development]
+    store = "https://hormonebliss-dev.myshopify.com/"
