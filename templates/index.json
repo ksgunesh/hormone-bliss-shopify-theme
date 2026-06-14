@@ -390,14 +390,14 @@
           "type": "ai_gen_block_b9d7c16",
           "settings": {
             "collections": [
-              "frontpage",
+              "testing",
               "combo-bioidentical-hormones",
               "specialty-bio-identical-hormone-creams",
-              "hydrogen",
-              "multivitamins",
+              "fertility-bliss",
               "collagen",
-              "detox-kits",
-              "active-lifestyle"
+              "active-lifestyle",
+              "carbmelt-health-detox-kits",
+              "books"
             ],
             "columns_desktop": 4,
             "columns_mobile": "2",
