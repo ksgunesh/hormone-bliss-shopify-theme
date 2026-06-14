@@ -27,8 +27,8 @@
             "vertical_alignment_flex_direction_column": "flex-start",
             "gap": 16,
             "width": "custom",
-            "custom_width": 65,
-            "width_mobile": "fill",
+            "custom_width": 60,
+            "width_mobile": "custom",
             "custom_width_mobile": 100,
             "height": "fit",
             "custom_height": 100,
@@ -167,51 +167,20 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "text_zi9Gga": {
-              "type": "text",
-              "name": "t:names.heading",
+            "menu_MP4cyJ": {
+              "type": "menu",
+              "name": "t:names.menu",
               "settings": {
-                "text": "<p>Quick Links</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "text_7fDETW": {
-              "type": "text",
-              "name": "t:names.description",
-              "settings": {
-                "text": "<p><a href=\"https://hormonebliss.com/free-consultation\">Free Consultation</a></p><p><a href=\"https://hormonebliss.com/fertility-bliss/\">Fertility Bliss</a></p><p><a href=\"https://hormonebliss.com/about/is-it-your-hormones/\">Take The Quiz</a></p><p><a href=\"https://shophormonebliss.com/\" target=\"_blank\">Dr. Tammy’s Supplements</a></p><p><a href=\"https://hormonebliss.com/leads/\">Resources</a></p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
+                "menu": "footer",
+                "heading": "Quick Links",
+                "menu_spacing": 16,
+                "show_as_accordion": false,
+                "accordion_icon": "caret",
+                "accordion_dividers": false,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "heading_preset": "h4",
+                "link_preset": "paragraph",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -221,8 +190,7 @@
             }
           },
           "block_order": [
-            "text_zi9Gga",
-            "text_7fDETW"
+            "menu_MP4cyJ"
           ]
         },
         "group_b3rdY8": {
@@ -329,7 +297,11 @@
         "group_qdqUWH",
         "group_b3rdY8"
       ],
-      "custom_css": [],
+      "custom_css": [
+        ".h4 {padding: 0;}",
+        "a {color: #d4af37; font-weight: 600;}",
+        "a:hover {color: #ffcb00;}"
+      ],
       "name": "Quick Links & Newsletter",
       "settings": {
         "content_direction": "row",
