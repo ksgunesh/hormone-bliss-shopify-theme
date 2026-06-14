@@ -213,9 +213,10 @@
 
 .carousel .list .item .content {
     background: rgba(0,0,0,.8);
+    border: 1px solid #000;
     border-radius: 8px;
-    box-shadow: 0 0 4px rgba(255, 255, 255, 1) inset;
-    padding: 24px;
+    box-shadow: 0 0 1px #fff inset;
+    padding: 40px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -347,6 +348,10 @@
 
 @media screen and (max-width: 768px) {
     .carousel .list .item .content {
+        padding: 28px;
+    }
+
+    .carousel .list .item .content {
         width: 90%;
     }
     
@@ -394,6 +399,10 @@
 }
 
 @media screen and (max-width: 480px) {
+    .carousel .list .item .content {
+        padding: 16px;
+    }
+
     .carousel .list .item .title {
         font-size: 1.6rem;
     }
