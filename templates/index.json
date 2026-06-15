@@ -310,7 +310,7 @@
           "name": "t:names.button",
           "settings": {
             "label": "Restore My Hormones",
-            "link": "https://hormonebliss.com/free-consultation/All Products",
+            "link": "https://hormonebliss.com/free-consultation/",
             "open_in_new_tab": false,
             "style_class": "button",
             "width": "fit-content",
