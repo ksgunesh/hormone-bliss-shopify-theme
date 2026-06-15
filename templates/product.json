@@ -181,9 +181,9 @@
                 "widget_style": "toggle",
                 "widget_style_card_selector": "radio_button",
                 "subscription_policy_url": "",
-                "color_text_body": "#FFFFFF",
-                "dividers_color": "#FFCB00",
-                "background_color": "#D4AF37",
+                "color_text_body": "#ffffff",
+                "dividers_color": "#ffcb00",
+                "background_color": "#d4af37",
                 "border_thickness": 2,
                 "border_radius": 8,
                 "product": "{{product}}"
@@ -261,7 +261,9 @@
         }
       },
       "custom_css": [
-        ".tab_label > span:first-child {display: block; font-weight: 700; line-height: 1.125; margin-bottom: 0.25rem;}"
+        ".toggle_card {text-shadow: 0 0 2px rgba(0,0,0,0.85);}",
+        ".toggle_card .price {font-weight: 700;}",
+        ".tab_label > span:first-child {display: block; font-weight: 600; line-height: 1.125; margin-bottom: 0.25rem;}"
       ],
       "settings": {
         "content_width": "content-center-aligned",
