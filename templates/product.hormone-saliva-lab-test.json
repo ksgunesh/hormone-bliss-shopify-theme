@@ -357,7 +357,7 @@
             "description_size": 14,
             "description_color": "#4d4743",
             "tile_1_enabled": true,
-            "tile_1_icon": "fa-solid fa-bed",
+            "tile_1_icon": "fa-solid fa-battery-quarter",
             "tile_1_title": "Fatigue",
             "tile_1_description": "Low progesterone disrupts deep sleep and calm energy, leaving you exhausted by mid-afternoon.",
             "tile_2_enabled": true,
