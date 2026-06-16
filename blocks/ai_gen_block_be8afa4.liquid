@@ -85,14 +85,7 @@
         <div class="ai-icon-grid__tile-{{ ai_gen_id }}">
           {% if tile_icon %}
             <div class="ai-icon-grid__icon-wrapper-{{ ai_gen_id }}">
-              {% comment %} <img
-                src="{{ tile_icon | image_url: width: 200 }}"
-                alt="{{ tile_title | escape }}"
-                loading="lazy"
-                width="{{ block.settings.icon_size }}"
-                height="{{ block.settings.icon_size }}"
-              > {% endcomment %}
-              <i class="fa-solid fa-face-awesome"></i>
+              <i class="{{ tile_icon }}"></i>
             </div>
           {% endif %}
 
