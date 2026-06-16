@@ -85,13 +85,14 @@
         <div class="ai-icon-grid__tile-{{ ai_gen_id }}">
           {% if tile_icon %}
             <div class="ai-icon-grid__icon-wrapper-{{ ai_gen_id }}">
-              <img
+              {% comment %} <img
                 src="{{ tile_icon | image_url: width: 200 }}"
                 alt="{{ tile_title | escape }}"
                 loading="lazy"
                 width="{{ block.settings.icon_size }}"
                 height="{{ block.settings.icon_size }}"
-              >
+              > {% endcomment %}
+              <i class="fa-solid fa-face-awesome"></i>
             </div>
           {% endif %}
 
@@ -348,7 +349,7 @@
       "default": true
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_1_icon",
       "label": "Icon"
     },
