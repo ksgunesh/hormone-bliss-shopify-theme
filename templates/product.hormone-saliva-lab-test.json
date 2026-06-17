@@ -803,12 +803,12 @@
         "ai_gen_block_fc6d4ad_C9F7Jh": {
           "type": "ai_gen_block_fc6d4ad",
           "settings": {
-            "list_layout": "stacked",
+            "list_layout": "inline",
             "mobile_list_layout": "stacked",
             "list_gap": 16,
             "item_layout": "inline",
             "item_gap": 8,
-            "desktop_width_percent": 65,
+            "desktop_width_percent": 50,
             "icon_position": "left",
             "icon_horizontal_alignment": "flex-start",
             "icon_vertical_alignment": "center",
