@@ -44,13 +44,14 @@
     {% if block.settings.item_layout == 'inline' %}
       order: {% if block.settings.icon_position == 'left' %}0{% else %}1{% endif %};
     {% endif %}
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
   }
 
   .ai-icon-list__icon-{{ ai_gen_id }} {
+    height: 100%;
     color: {{ block.settings.icon_color }};
-    width: {{ block.settings.icon_width }}px;
-    height: {{ block.settings.icon_height }}px;
-    object-fit: contain;
+    width: 100%;
   }
 
   .ai-icon-list__icon-placeholder-{{ ai_gen_id }} {
