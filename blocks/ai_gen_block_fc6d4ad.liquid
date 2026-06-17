@@ -99,6 +99,12 @@
   }
 
   @media screen and (max-width: 749px) {
+    .ai-icon-list-{{ ai_gen_id }} {
+      display: block;
+      width: {{ block.settings.mobile_width_percent }}%;
+      max-width: 100%;
+    }
+
     .ai-icon-list__container-{{ ai_gen_id }} {
       {% if block.settings.mobile_list_layout == 'stacked' %}
         flex-direction: column;
@@ -241,6 +247,16 @@
       "step": 4,
       "unit": "px",
       "default": 8
+    },
+    {
+      "type": "range",
+      "id": "mobile_width_percent",
+      "label": "Mobile width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
     },
     {
       "type": "range",
