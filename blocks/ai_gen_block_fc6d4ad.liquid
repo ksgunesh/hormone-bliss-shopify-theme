@@ -1,0 +1,965 @@
+{% doc %}
+  @prompt
+    Create an icon list that the list items can be inline or stacked. Each item in the list can also be line or stacked (on a block level). Icon should have width / height settings. title can have background, border settings. Icon alignment can be left, right with vertical alignment, start, middle, end. No of Items can range from 0 to 20.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-icon-list-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+  }
+
+  .ai-icon-list__container-{{ ai_gen_id }} {
+    display: flex;
+    {% if block.settings.list_layout == 'inline' %}
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: {{ block.settings.list_gap }}px;
+    {% else %}
+      flex-direction: column;
+      gap: {{ block.settings.list_gap }}px;
+    {% endif %}
+  }
+
+  .ai-icon-list__item-{{ ai_gen_id }} {
+    display: flex;
+    {% if block.settings.item_layout == 'inline' %}
+      flex-direction: row;
+      align-items: {{ block.settings.icon_vertical_alignment }};
+      gap: {{ block.settings.item_gap }}px;
+    {% else %}
+      flex-direction: column;
+      align-items: {{ block.settings.icon_horizontal_alignment }};
+      gap: {{ block.settings.item_gap }}px;
+    {% endif %}
+    {% if block.settings.list_layout == 'inline' %}
+      flex: 1 1 auto;
+    {% endif %}
+  }
+
+  .ai-icon-list__icon-wrapper-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    {% if block.settings.item_layout == 'inline' %}
+      order: {% if block.settings.icon_position == 'left' %}0{% else %}1{% endif %};
+    {% endif %}
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+  }
+
+  .ai-icon-list__icon-{{ ai_gen_id }} {
+    height: 100%;
+    color: {{ block.settings.icon_color }};
+    width: 100%;
+  }
+
+  .ai-icon-list__icon-placeholder-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_width }}px;
+    height: {{ block.settings.icon_height }}px;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-icon-list__icon-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-icon-list__content-{{ ai_gen_id }} {
+    flex: 1;
+    {% if block.settings.item_layout == 'inline' %}
+      order: {% if block.settings.icon_position == 'left' %}1{% else %}0{% endif %};
+    {% endif %}
+  }
+
+  .ai-icon-list__title-{{ ai_gen_id }} {
+    margin: 0;
+    padding: {{ block.settings.title_padding_vertical }}px {{ block.settings.title_padding_horizontal }}px;
+    background-color: {{ block.settings.title_background_color }};
+    border: {{ block.settings.title_border_width }}px solid {{ block.settings.title_border_color }};
+    border-radius: {{ block.settings.title_border_radius }}px;
+    color: {{ block.settings.title_text_color }};
+    font-size: {{ block.settings.title_font_size }}px;
+    {% if block.settings.item_layout == 'stacked' %}
+      text-align: {{ block.settings.icon_horizontal_alignment }};
+    {% endif %}
+  }
+
+  .ai-icon-list__description-{{ ai_gen_id }} {
+    margin: 8px 0 0 0;
+    color: {{ block.settings.description_text_color }};
+    font-size: {{ block.settings.description_font_size }}px;
+    {% if block.settings.item_layout == 'stacked' %}
+      text-align: {{ block.settings.icon_horizontal_alignment }};
+    {% endif %}
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-icon-list-{{ ai_gen_id }} {
+      display: block;
+      width: {{ block.settings.mobile_width_percent }}%;
+      max-width: 100%;
+    }
+
+    .ai-icon-list__container-{{ ai_gen_id }} {
+      {% if block.settings.mobile_list_layout == 'stacked' %}
+        flex-direction: column;
+      {% endif %}
+    }
+  }
+{% endstyle %}
+
+<icon-list-{{ ai_gen_id }} class="ai-icon-list-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-icon-list__container-{{ ai_gen_id }}">
+    {% for i in (1..20) %}
+      {% liquid
+        assign item_enabled_key = 'item_' | append: i | append: '_enabled'
+        assign item_icon_key = 'item_' | append: i | append: '_icon'
+        assign item_title_key = 'item_' | append: i | append: '_title'
+        assign item_description_key = 'item_' | append: i | append: '_description'
+
+        assign item_enabled = block.settings[item_enabled_key]
+        assign item_icon = block.settings[item_icon_key]
+        assign item_title = block.settings[item_title_key]
+        assign item_description = block.settings[item_description_key]
+      %}
+
+      {% if item_enabled %}
+        <div class="ai-icon-list__item-{{ ai_gen_id }}">
+          <div class="ai-icon-list__icon-wrapper-{{ ai_gen_id }}">
+            {% if item_icon %}
+              <div class="ai-icon-list__icon-{{ ai_gen_id }}">
+                <i class="{{ item_icon }}"></i>
+              </div>
+            {% else %}
+              <div class="ai-icon-list__icon-placeholder-{{ ai_gen_id }}">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="ai-icon-list__content-{{ ai_gen_id }}">
+            {% if item_title != blank %}
+              <h3 class="ai-icon-list__title-{{ ai_gen_id }}">{{ item_title }}</h3>
+            {% endif %}
+            {% if item_description != blank %}
+              <div class="ai-icon-list__description-{{ ai_gen_id }}">{{ item_description }}</div>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</icon-list-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class IconList{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+      }
+    }
+
+    customElements.define('icon-list-{{ ai_gen_id }}', IconList{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Icon list",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "list_layout",
+      "label": "List layout",
+      "options": [
+        {
+          "value": "inline",
+          "label": "Inline"
+        },
+        {
+          "value": "stacked",
+          "label": "Stacked"
+        }
+      ],
+      "default": "stacked"
+    },
+    {
+      "type": "select",
+      "id": "mobile_list_layout",
+      "label": "Mobile list layout",
+      "options": [
+        {
+          "value": "inline",
+          "label": "Inline"
+        },
+        {
+          "value": "stacked",
+          "label": "Stacked"
+        }
+      ],
+      "default": "stacked"
+    },
+    {
+      "type": "range",
+      "id": "list_gap",
+      "label": "List gap",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "item_layout",
+      "label": "Item layout",
+      "options": [
+        {
+          "value": "inline",
+          "label": "Inline"
+        },
+        {
+          "value": "stacked",
+          "label": "Stacked"
+        }
+      ],
+      "default": "inline"
+    },
+    {
+      "type": "range",
+      "id": "item_gap",
+      "label": "Item gap",
+      "min": 0,
+      "max": 24,
+      "step": 4,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "mobile_width_percent",
+      "label": "Mobile width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "select",
+      "id": "icon_position",
+      "label": "Icon position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left",
+      "info": "Only applies when item layout is inline"
+    },
+    {
+      "type": "select",
+      "id": "icon_horizontal_alignment",
+      "label": "Horizontal alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "info": "Only applies when item layout is stacked"
+    },
+    {
+      "type": "select",
+      "id": "icon_vertical_alignment",
+      "label": "Vertical alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Start"
+        },
+        {
+          "value": "center",
+          "label": "Middle"
+        },
+        {
+          "value": "flex-end",
+          "label": "End"
+        }
+      ],
+      "default": "flex-start",
+      "info": "Only applies when item layout is inline"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Color",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "range",
+      "id": "icon_width",
+      "label": "Width",
+      "min": 20,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "icon_height",
+      "label": "Height",
+      "min": 20,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Title"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "title_text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "title_background_color",
+      "label": "Background color",
+      "default": "rgba(0,0,0,0)"
+    },
+    {
+      "type": "range",
+      "id": "title_padding_vertical",
+      "label": "Padding vertical",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "title_padding_horizontal",
+      "label": "Padding horizontal",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "title_border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "title_border_color",
+      "label": "Border color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "title_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Description"
+    },
+    {
+      "type": "range",
+      "id": "description_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "description_text_color",
+      "label": "Text color",
+      "default": "#4d4743"
+    },
+    {
+      "type": "header",
+      "content": "Item 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_1_enabled",
+      "label": "Enable item 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "item_1_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_1_title",
+      "label": "Title",
+      "default": "Feature 1"
+    },
+    {
+      "type": "textarea",
+      "id": "item_1_description",
+      "label": "Description",
+      "default": "Describe your feature here"
+    },
+    {
+      "type": "header",
+      "content": "Item 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_2_enabled",
+      "label": "Enable item 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "item_2_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_2_title",
+      "label": "Title",
+      "default": "Feature 2"
+    },
+    {
+      "type": "textarea",
+      "id": "item_2_description",
+      "label": "Description",
+      "default": "Describe your feature here"
+    },
+    {
+      "type": "header",
+      "content": "Item 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_3_enabled",
+      "label": "Enable item 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "item_3_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_3_title",
+      "label": "Title",
+      "default": "Feature 3"
+    },
+    {
+      "type": "textarea",
+      "id": "item_3_description",
+      "label": "Description",
+      "default": "Describe your feature here"
+    },
+    {
+      "type": "header",
+      "content": "Item 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_4_enabled",
+      "label": "Enable item 4",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "item_4_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_4_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "item_4_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Item 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_5_enabled",
+      "label": "Enable item 5",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "item_5_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_5_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "item_5_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Item 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_6_enabled",
+      "label": "Enable item 6",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "item_6_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_6_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "item_6_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Item 7"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_7_enabled",
+      "label": "Enable item 7",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "item_7_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_7_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "item_7_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Item 8"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_8_enabled",
+      "label": "Enable item 8",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "item_8_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_8_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "item_8_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Item 9"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_9_enabled",
+      "label": "Enable item 9",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "item_9_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_9_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "item_9_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Item 10"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_10_enabled",
+      "label": "Enable item 10",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "item_10_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_10_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "item_10_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Item 11"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_11_enabled",
+      "label": "Enable item 11",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "item_11_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_11_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "item_11_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Item 12"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_12_enabled",
+      "label": "Enable item 12",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "item_12_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_12_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "item_12_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Item 13"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_13_enabled",
+      "label": "Enable item 13",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "item_13_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_13_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "item_13_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Item 14"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_14_enabled",
+      "label": "Enable item 14",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "item_14_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_14_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "item_14_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Item 15"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_15_enabled",
+      "label": "Enable item 15",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "item_15_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_15_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "item_15_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Item 16"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_16_enabled",
+      "label": "Enable item 16",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "item_16_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_16_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "item_16_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Item 17"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_17_enabled",
+      "label": "Enable item 17",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "item_17_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_17_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "item_17_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Item 18"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_18_enabled",
+      "label": "Enable item 18",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "item_18_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_18_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "item_18_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Item 19"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_19_enabled",
+      "label": "Enable item 19",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "item_19_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_19_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "item_19_description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Item 20"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_20_enabled",
+      "label": "Enable item 20",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "item_20_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "item_20_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "item_20_description",
+      "label": "Description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon list"
+    }
+  ]
+}
+{% endschema %}
