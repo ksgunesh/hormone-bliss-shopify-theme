@@ -40,9 +40,9 @@
   }
 
   .ai-icon-grid__icon-wrapper-{{ ai_gen_id }} svg {
-    width: 100%;
     height: 100%;
-    fill: {{ block.settings.icon_color }};
+    color: {{ block.settings.icon_color }};
+    width: 100%;
   }
 
   .ai-icon-grid__title-{{ ai_gen_id }} {
@@ -85,13 +85,7 @@
         <div class="ai-icon-grid__tile-{{ ai_gen_id }}">
           {% if tile_icon %}
             <div class="ai-icon-grid__icon-wrapper-{{ ai_gen_id }}">
-              <img
-                src="{{ tile_icon | image_url: width: 200 }}"
-                alt="{{ tile_title | escape }}"
-                loading="lazy"
-                width="{{ block.settings.icon_size }}"
-                height="{{ block.settings.icon_size }}"
-              >
+              <i class="{{ tile_icon }}"></i>
             </div>
           {% endif %}
 
@@ -348,7 +342,7 @@
       "default": true
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_1_icon",
       "label": "Icon"
     },
@@ -375,7 +369,7 @@
       "default": true
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_2_icon",
       "label": "Icon"
     },
@@ -402,7 +396,7 @@
       "default": true
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_3_icon",
       "label": "Icon"
     },
@@ -429,7 +423,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_4_icon",
       "label": "Icon"
     },
@@ -454,7 +448,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_5_icon",
       "label": "Icon"
     },
@@ -479,7 +473,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_6_icon",
       "label": "Icon"
     },
@@ -504,7 +498,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_7_icon",
       "label": "Icon"
     },
@@ -529,7 +523,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_8_icon",
       "label": "Icon"
     },
@@ -554,7 +548,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_9_icon",
       "label": "Icon"
     },
@@ -579,7 +573,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_10_icon",
       "label": "Icon"
     },
@@ -604,7 +598,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_11_icon",
       "label": "Icon"
     },
@@ -629,7 +623,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_12_icon",
       "label": "Icon"
     },
@@ -654,7 +648,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_13_icon",
       "label": "Icon"
     },
@@ -679,7 +673,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_14_icon",
       "label": "Icon"
     },
@@ -704,7 +698,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_15_icon",
       "label": "Icon"
     },
@@ -729,7 +723,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_16_icon",
       "label": "Icon"
     },
@@ -754,7 +748,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_17_icon",
       "label": "Icon"
     },
@@ -779,7 +773,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_18_icon",
       "label": "Icon"
     },
@@ -804,7 +798,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_19_icon",
       "label": "Icon"
     },
@@ -829,7 +823,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_20_icon",
       "label": "Icon"
     },
@@ -854,7 +848,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_21_icon",
       "label": "Icon"
     },
@@ -879,7 +873,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_22_icon",
       "label": "Icon"
     },
@@ -904,7 +898,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_23_icon",
       "label": "Icon"
     },
@@ -929,7 +923,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "tile_24_icon",
       "label": "Icon"
     },
