@@ -47,6 +47,7 @@
   }
 
   .ai-icon-list__icon-{{ ai_gen_id }} {
+    color: {{ block.settings.icon_color }};
     width: {{ block.settings.icon_width }}px;
     height: {{ block.settings.icon_height }}px;
     object-fit: contain;
@@ -124,14 +125,9 @@
         <div class="ai-icon-list__item-{{ ai_gen_id }}">
           <div class="ai-icon-list__icon-wrapper-{{ ai_gen_id }}">
             {% if item_icon %}
-              <img
-                src="{{ item_icon | image_url: width: 200 }}"
-                alt="{{ item_title | escape }}"
-                class="ai-icon-list__icon-{{ ai_gen_id }}"
-                loading="lazy"
-                width="{{ block.settings.icon_width }}"
-                height="{{ block.settings.icon_height }}"
-              >
+              <div class="ai-icon-list__icon-{{ ai_gen_id }}">
+                <i class="{{ item_icon }}"></i>
+              </div>
             {% else %}
               <div class="ai-icon-list__icon-placeholder-{{ ai_gen_id }}">
                 {{ 'image' | placeholder_svg_tag }}
@@ -319,6 +315,12 @@
       "info": "Only applies when item layout is inline"
     },
     {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Color",
+      "default": "#e6e6e6"
+    },
+    {
       "type": "range",
       "id": "icon_width",
       "label": "Width",
@@ -441,7 +443,7 @@
       "default": true
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "item_1_icon",
       "label": "Icon"
     },
@@ -468,7 +470,7 @@
       "default": true
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "item_2_icon",
       "label": "Icon"
     },
@@ -495,7 +497,7 @@
       "default": true
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "item_3_icon",
       "label": "Icon"
     },
@@ -522,7 +524,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "item_4_icon",
       "label": "Icon"
     },
@@ -547,7 +549,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "item_5_icon",
       "label": "Icon"
     },
@@ -572,7 +574,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "item_6_icon",
       "label": "Icon"
     },
@@ -597,7 +599,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "item_7_icon",
       "label": "Icon"
     },
@@ -622,7 +624,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "item_8_icon",
       "label": "Icon"
     },
@@ -647,7 +649,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "item_9_icon",
       "label": "Icon"
     },
@@ -672,7 +674,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "item_10_icon",
       "label": "Icon"
     },
@@ -697,7 +699,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "item_11_icon",
       "label": "Icon"
     },
@@ -722,7 +724,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "item_12_icon",
       "label": "Icon"
     },
@@ -747,7 +749,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "item_13_icon",
       "label": "Icon"
     },
@@ -772,7 +774,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "item_14_icon",
       "label": "Icon"
     },
@@ -797,7 +799,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "item_15_icon",
       "label": "Icon"
     },
@@ -822,7 +824,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "item_16_icon",
       "label": "Icon"
     },
@@ -847,7 +849,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "item_17_icon",
       "label": "Icon"
     },
@@ -872,7 +874,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "item_18_icon",
       "label": "Icon"
     },
@@ -897,7 +899,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "item_19_icon",
       "label": "Icon"
     },
@@ -922,7 +924,7 @@
       "default": false
     },
     {
-      "type": "image_picker",
+      "type": "text",
       "id": "item_20_icon",
       "label": "Icon"
     },
