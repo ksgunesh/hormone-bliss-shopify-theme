@@ -18,7 +18,7 @@
           "type": "_announcement",
           "settings": {
             "text": "Need to check hormones? Click here for our best seller... Hormone Saliva Kit!",
-            "link": "https://hormonebliss-dev.myshopify.com/discount/THRIVE75?redirect=%2Fproducts%2Fstarter-home-hormone-test-kit",
+            "link": "shopify://products/starter-home-hormone-test-kit",
             "font": "var(--font-subheading--family)",
             "font_size": "1rem",
             "weight": "",
