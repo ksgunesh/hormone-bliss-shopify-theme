@@ -17,7 +17,7 @@
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
-            "text": "Need to check hormones? Use code THRIVE75 for our saliva kit!",
+            "text": "Need to check hormones? Click here for our best seller... Hormone Saliva Kit!",
             "link": "https://hormonebliss-dev.myshopify.com/discount/THRIVE75?redirect=%2Fproducts%2Fstarter-home-hormone-test-kit",
             "font": "var(--font-subheading--family)",
             "font_size": "1rem",
@@ -31,7 +31,6 @@
       "block_order": [
         "announcement_BxgCk9"
       ],
-      "disabled": true,
       "name": "t:names.announcement_bar",
       "settings": {
         "speed": 5,
