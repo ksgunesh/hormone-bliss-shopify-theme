@@ -17,7 +17,7 @@
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
-            "text": "Need to check hormones? Click here for our best seller... Hormone Saliva Kit!",
+            "text": "Click here to discover your hormone levels with our Saliva Test Kit",
             "link": "shopify://products/starter-home-hormone-test-kit",
             "font": "var(--font-subheading--family)",
             "font_size": "1rem",
