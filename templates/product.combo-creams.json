@@ -993,13 +993,40 @@
             "tile_24_description": ""
           },
           "blocks": {}
+        },
+        "text_dM6HY3": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p><strong>Full Ingredient List</strong></p><p>Purified Water, Glycerin (Kosher, Plant-Based), Caprylic/Capric Triglyceride, Carbopol Ultrez 10, Olive Oil, Coconut Oil, Isopropyl Palmitate, Stearic Acid, Cetyl Alcohol, Sunflower Lecithin, Shea Butter, Progesterone (Micronized USP), DHEA (Micronized USP), Estriol (Micronized USP), Estradiol (Micronized USP), Vitamin D3, Vitamin K2, MSM (Methylsulfonylmethane), Aloe Vera Gel, Allantoin, Sodium Bicarbonate, Herbal-Active® Natural Preservative.</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "paragraph",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 16,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
         }
       },
       "block_order": [
         "ai_gen_block_457909b_bTxNgJ",
         "text_AAwpby",
         "text_nabm6U",
-        "ai_gen_block_be8afa4_WHGiWY"
+        "ai_gen_block_be8afa4_WHGiWY",
+        "text_dM6HY3"
       ],
       "name": "Transparency",
       "settings": {
