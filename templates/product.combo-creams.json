@@ -230,7 +230,7 @@
               "settings": {
                 "text": "{{ closest.product.description }}",
                 "width": "100%",
-                "max_width": "normal",
+                "max_width": "none",
                 "alignment": "left",
                 "type_preset": "rte",
                 "font": "var(--font-primary--family)",
@@ -518,9 +518,9 @@
           "settings": {
             "image": "shopify://shop_images/img-editorial-woman-with-combo.webp",
             "link": "",
-            "image_ratio": "square",
-            "width": "fill",
-            "custom_width": 100,
+            "image_ratio": "adapt",
+            "width": "custom",
+            "custom_width": 50,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
             "height": "fit",
@@ -624,7 +624,7 @@
               "settings": {
                 "text": "<p>A bioidentical combo cream. Topical. Once daily. All in one place. Because you shouldn't need a pharmacy shelf to feel normal.</p>",
                 "width": "fit-content",
-                "max_width": "narrow",
+                "max_width": "none",
                 "alignment": "left",
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
@@ -1003,7 +1003,7 @@
           "settings": {
             "text": "<p><strong>Full Ingredient List</strong></p><p>Purified Water, Glycerin (Kosher, Plant-Based), Caprylic/Capric Triglyceride, Carbopol Ultrez 10, Olive Oil, Coconut Oil, Isopropyl Palmitate, Stearic Acid, Cetyl Alcohol, Sunflower Lecithin, Shea Butter, Progesterone (Micronized USP), DHEA (Micronized USP), Estriol (Micronized USP), Estradiol (Micronized USP), Vitamin D3, Vitamin K2, MSM (Methylsulfonylmethane), Aloe Vera Gel, Allantoin, Sodium Bicarbonate, Herbal-Active® Natural Preservative.</p>",
             "width": "fit-content",
-            "max_width": "normal",
+            "max_width": "none",
             "alignment": "left",
             "type_preset": "paragraph",
             "font": "var(--font-body--family)",
