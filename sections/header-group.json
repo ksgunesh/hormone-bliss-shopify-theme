@@ -18,11 +18,11 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "<strong>20% OFF SITEWIDE. ENTER  CODE FREEDOM20 AT CHECKOUT</strong>",
+            "text": "20% OFF SITEWIDE. ENTER  CODE FREEDOM20 AT CHECKOUT",
             "link": "",
             "font": "var(--font-accent--family)",
             "font_size": "1.25rem",
-            "weight": "",
+            "weight": "900",
             "letter_spacing": "loose",
             "case": "none"
           },
