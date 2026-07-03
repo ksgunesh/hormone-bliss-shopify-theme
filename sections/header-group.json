@@ -14,6 +14,20 @@
     "header_announcements_9jGBFp": {
       "type": "header-announcements",
       "blocks": {
+        "announcement_8ehHyP": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "settings": {
+            "text": "20% OFF SITEWIDE. ENTER  CODE FREEDOM20 AT CHECKOUT",
+            "link": "",
+            "font": "var(--font-subheading--family)",
+            "font_size": "3.5rem",
+            "weight": "",
+            "letter_spacing": "normal",
+            "case": "none"
+          },
+          "blocks": {}
+        },
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
@@ -29,6 +43,7 @@
         }
       },
       "block_order": [
+        "announcement_8ehHyP",
         "announcement_BxgCk9"
       ],
       "custom_css": [],
