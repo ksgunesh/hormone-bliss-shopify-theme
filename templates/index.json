@@ -397,8 +397,8 @@
               "hormone-creams",
               "bioidentical-topical-hormone-creams"
             ],
-            "columns_desktop": 4,
-            "columns_mobile": "2",
+            "columns_desktop": 3,
+            "columns_mobile": "1",
             "grid_gap": 24,
             "desktop_width_percent": 100,
             "image_ratio": 100,
