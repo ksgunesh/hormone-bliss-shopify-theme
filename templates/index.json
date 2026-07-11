@@ -16,6 +16,7 @@
           "type": "slide",
           "settings": {
             "slide_image": "shopify://shop_images/bg-hp-combo-cream.webp",
+            "slide_image_position": "0% 0%",
             "title": "Feel Like Yourself Again.",
             "title_color": "#ffffff",
             "description": "<p><strong>One Daily Cream. Three Bioidentical Hormones.</strong></p>\n<p>Support relief from hot flashes, poor sleep, brain fog, mood swings, anxiety, low libido, and stubborn weight gain.</p>\n<p>Use code <strong>COMBO</strong> at checkout. <em>Subscription required<em></em>.</em></p>",
@@ -32,6 +33,7 @@
           "type": "slide",
           "settings": {
             "slide_image": "shopify://shop_images/hp-hero-saliva-kit.webp",
+            "slide_image_position": "",
             "title": "Is it Your Hormones?",
             "title_color": "#ffffff",
             "description": "<p><strong>Test Don't Guess!</strong></p>\n<p>Take the home hormone lab test that thousands of women are using to finally get real answers and solutions!</p>",
@@ -48,6 +50,7 @@
           "type": "slide",
           "settings": {
             "slide_image": "shopify://shop_images/hp-hero-bliss-membership.webp",
+            "slide_image_position": "",
             "title": "Tired of Brain Fog, Fatigue, and Feeling \"Off\"?",
             "title_color": "#ffffff",
             "description": "Find relief from over 30 menopause and perimenopause symptoms with doctor-guided hormone therapy designed around your unique needs.",
@@ -903,7 +906,6 @@
         "color_scheme": "",
         "background_media": "image",
         "video_position": "cover",
-        "background_image": "shopify://shop_images/image_59f465f7-53cc-4a7c-94d9-435dbf691feb.png",
         "background_image_position": "cover",
         "border": "none",
         "border_width": 1,
