@@ -235,7 +235,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<p>Other Categories</p>",
+            "text": "<p>Other categories</p>",
             "width": "fit-content",
             "max_width": "none",
             "alignment": "left",
@@ -328,11 +328,11 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2>Frequently asked questions</h2>",
+            "text": "<p><strong>Frequently asked questions</strong></p>",
             "width": "fit-content",
             "max_width": "narrow",
             "alignment": "left",
-            "type_preset": "h3",
+            "type_preset": "h2",
             "font": "var(--font-body--family)",
             "font_size": "",
             "line_height": "normal",
