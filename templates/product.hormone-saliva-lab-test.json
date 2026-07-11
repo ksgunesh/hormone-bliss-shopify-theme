@@ -774,6 +774,32 @@
           },
           "blocks": {}
         },
+        "text_YaKXKM": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<p>Key hormone markers.</p>",
+            "width": "fit-content",
+            "max_width": "none",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
         "text_8Q6etW": {
           "type": "text",
           "name": "t:names.text",
@@ -912,6 +938,7 @@
       },
       "block_order": [
         "ai_gen_block_457909b_wDyQRU",
+        "text_YaKXKM",
         "text_8Q6etW",
         "ai_gen_block_fc6d4ad_C9F7Jh"
       ],
