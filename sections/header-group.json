@@ -14,14 +14,29 @@
     "header_announcements_9jGBFp": {
       "type": "header-announcements",
       "blocks": {
+        "announcement_8ehHyP": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "disabled": true,
+          "settings": {
+            "text": "20% OFF SITEWIDE. ENTER  CODE FREEDOM20 AT CHECKOUT",
+            "link": "",
+            "font": "var(--font-accent--family)",
+            "font_size": "1.25rem",
+            "weight": "900",
+            "letter_spacing": "loose",
+            "case": "none"
+          },
+          "blocks": {}
+        },
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
-            "text": "Click here to discover your hormone levels with our Saliva Test Kit",
+            "text": "Click here to discover your hormone levels with our Saliva Test Kit!",
             "link": "shopify://products/starter-home-hormone-test-kit",
-            "font": "var(--font-subheading--family)",
+            "font": "var(--font-accent--family)",
             "font_size": "1rem",
-            "weight": "",
+            "weight": "600",
             "letter_spacing": "loose",
             "case": "none"
           },
@@ -29,13 +44,14 @@
         }
       },
       "block_order": [
+        "announcement_8ehHyP",
         "announcement_BxgCk9"
       ],
       "custom_css": [],
       "name": "t:names.announcement_bar",
       "settings": {
         "speed": 5,
-        "section_width": "page-width",
+        "section_width": "full-width",
         "color_scheme": "scheme-3",
         "divider_width": 0,
         "padding-block-start": 12,

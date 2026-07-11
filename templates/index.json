@@ -12,6 +12,38 @@
     "image_content_slider_3qcgH8": {
       "type": "image-content-slider",
       "blocks": {
+        "slide_nJ3YDU": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify://shop_images/bg-hp-combo-cream.webp",
+            "title": "Feel Like Yourself Again.",
+            "title_color": "#ffffff",
+            "description": "<strong>One Daily Cream. Three Bioidentical Hormones.</strong>\n<br><br>\nSupport relief from hot flashes, poor sleep, brain fog, mood swings, anxiety, low libido, and stubborn weight gain.\n<br><br>\nUse code <strong>COMBO</strong> at checkout. <em>Subscription required<em></em>.</em>",
+            "description_color": "#ffffff",
+            "show_first_button": true,
+            "first_button_text": "Shop Now",
+            "first_button_link": "https://shophormonebliss.com/discount/COMBO?redirect=%2Fproducts%2Fbioidentical-hormone-combo-cream-biest-progesterone-dhea",
+            "show_second_button": false,
+            "second_button_text": "SUBSCRIBE",
+            "second_button_link": ""
+          }
+        },
+        "slide_HKBJVz": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify://shop_images/hp-hero-saliva-kit.webp",
+            "title": "Is it Your Hormones?",
+            "title_color": "#ffffff",
+            "description": "<strong>Test Don't Guess!</strong>\n<br><br>\nTake the home hormone lab test that thousands of women are using to finally get real answers and solutions!",
+            "description_color": "#ffffff",
+            "show_first_button": true,
+            "first_button_text": "Order Now",
+            "first_button_link": "shopify://products/starter-home-hormone-test-kit",
+            "show_second_button": false,
+            "second_button_text": "Order Now",
+            "second_button_link": ""
+          }
+        },
         "slide_wXrNPt": {
           "type": "slide",
           "settings": {
@@ -27,114 +59,17 @@
             "second_button_text": "Take The Quiz",
             "second_button_link": "https://hormonebliss.com/about/is-it-your-hormones/"
           }
-        },
-        "slide_HKBJVz": {
-          "type": "slide",
-          "settings": {
-            "slide_image": "shopify://shop_images/hp-hero-saliva-kit.webp",
-            "title": "Is it Your Hormones?",
-            "title_color": "#ffffff",
-            "description": "<strong>Test Don't Guess!</strong> Take the home hormone lab test that thousands of women are using to finally get real answers and solutions!",
-            "description_color": "#ffffff",
-            "show_first_button": true,
-            "first_button_text": "Order Now",
-            "first_button_link": "shopify://products/starter-home-hormone-test-kit",
-            "show_second_button": false,
-            "second_button_text": "Order Now",
-            "second_button_link": ""
-          }
         }
       },
       "block_order": [
-        "slide_wXrNPt",
-        "slide_HKBJVz"
+        "slide_nJ3YDU",
+        "slide_HKBJVz",
+        "slide_wXrNPt"
       ],
       "name": "Hero",
       "settings": {
         "autoplay_speed": 7,
         "transition_speed": 2
-      }
-    },
-    "hero_jVaWmY": {
-      "type": "hero",
-      "blocks": {
-        "text_YLPk4p": {
-          "type": "text",
-          "name": "t:names.heading",
-          "settings": {
-            "text": "<p>Browse our latest products</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground-heading)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "button_H9gpTf": {
-          "type": "button",
-          "name": "t:names.button",
-          "settings": {
-            "label": "Shop all",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button-secondary",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "text_YLPk4p",
-        "button_H9gpTf"
-      ],
-      "disabled": true,
-      "name": "t:names.hero",
-      "settings": {
-        "media_type_1": "image",
-        "media_type_2": "image",
-        "stack_media_on_mobile": false,
-        "custom_mobile_media": false,
-        "media_type_1_mobile": "image",
-        "media_type_2_mobile": "image",
-        "link": "",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "space-between",
-        "vertical_alignment": "flex-end",
-        "align_baseline": true,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 24,
-        "section_width": "page-width",
-        "section_height": "medium",
-        "section_height_custom": 50,
-        "color_scheme": "scheme-6",
-        "toggle_overlay": true,
-        "overlay_color": "#12121266",
-        "overlay_style": "solid",
-        "gradient_direction": "to bottom",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 100,
-        "padding-block-end": 72
       }
     },
     "section_dig7xi": {
@@ -212,6 +147,7 @@
         },
         "ai_gen_block_2fc82a4_txC37W": {
           "type": "ai_gen_block_2fc82a4",
+          "disabled": true,
           "settings": {
             "desktop_width_percent": 85,
             "padding": 15,
@@ -390,17 +326,13 @@
           "type": "ai_gen_block_b9d7c16",
           "settings": {
             "collections": [
-              "testing-kit",
+              "hormone-lab-testing-kits",
               "combo-bioidentical-hormones",
-              "specialty-bio-identical-hormone-creams",
-              "fertility-bliss",
-              "collagen",
-              "active-lifestyle",
-              "multivitamins",
-              "books"
+              "hormone-creams",
+              "bioidentical-topical-hormone-creams"
             ],
-            "columns_desktop": 4,
-            "columns_mobile": "2",
+            "columns_desktop": 3,
+            "columns_mobile": "1",
             "grid_gap": 24,
             "desktop_width_percent": 100,
             "image_ratio": 100,
@@ -414,11 +346,27 @@
             "title_color": "#ff009d"
           },
           "blocks": {}
+        },
+        "button_ApBDVP": {
+          "type": "button",
+          "name": "t:names.button",
+          "settings": {
+            "label": "Shop All Products Now",
+            "link": "shopify://collections/all",
+            "open_in_new_tab": false,
+            "style_class": "button",
+            "width": "custom",
+            "custom_width": 50,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
         }
       },
       "block_order": [
         "text_7EFT3c",
-        "ai_gen_block_b9d7c16_WNXyf4"
+        "ai_gen_block_b9d7c16_WNXyf4",
+        "button_ApBDVP"
       ],
       "name": "Shop By Category",
       "settings": {
@@ -447,6 +395,37 @@
         "gradient_direction": "to top",
         "padding-block-start": 48,
         "padding-block-end": 48
+      }
+    },
+    "blocks_V9XPXR": {
+      "type": "_blocks",
+      "name": "Callout grid",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     },
     "section_Rfw9LV": {
@@ -834,9 +813,9 @@
   },
   "order": [
     "image_content_slider_3qcgH8",
-    "hero_jVaWmY",
     "section_dig7xi",
     "1781300476046e304a",
+    "blocks_V9XPXR",
     "section_Rfw9LV",
     "section_7Pq8Rd"
   ]
