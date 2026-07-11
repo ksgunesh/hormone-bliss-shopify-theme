@@ -12,21 +12,21 @@
     "image_content_slider_3qcgH8": {
       "type": "image-content-slider",
       "blocks": {
-        "slide_wXrNPt": {
+        "slide_nJ3YDU": {
           "type": "slide",
           "settings": {
-            "slide_image": "shopify://shop_images/hp-hero-bliss-membership.webp",
-            "slide_image_position": "50% 50%",
-            "title": "Tired of Brain Fog, Fatigue, and Feeling \"Off\"?",
+            "slide_image": "shopify://shop_images/bg-hp-combo-cream.webp",
+            "slide_image_position": "0% 0%",
+            "title": "Feel Like Yourself Again.",
             "title_color": "#ffffff",
-            "description": "Find relief from over 30 menopause and perimenopause symptoms with doctor-guided hormone therapy designed around your unique needs.",
+            "description": "<p><strong>One Daily Cream. Three Bioidentical Hormones.</strong></p>\n<p>Support relief from hot flashes, poor sleep, brain fog, mood swings, anxiety, low libido, and stubborn weight gain.</p>\n<p>Use code <strong>COMBO</strong> at checkout. <em>Subscription required<em></em>.</em></p>",
             "description_color": "#ffffff",
             "show_first_button": true,
-            "first_button_text": "Take The First Step",
-            "first_button_link": "https://hormonebliss.com/free-consultation/",
-            "show_second_button": true,
-            "second_button_text": "Take The Quiz",
-            "second_button_link": "https://hormonebliss.com/about/is-it-your-hormones/"
+            "first_button_text": "Shop Now",
+            "first_button_link": "https://shophormonebliss.com/discount/COMBO?redirect=%2Fproducts%2Fbioidentical-hormone-combo-cream-biest-progesterone-dhea",
+            "show_second_button": false,
+            "second_button_text": "SUBSCRIBE",
+            "second_button_link": ""
           }
         },
         "slide_HKBJVz": {
@@ -46,28 +46,28 @@
             "second_button_link": ""
           }
         },
-        "slide_nJ3YDU": {
+        "slide_wXrNPt": {
           "type": "slide",
           "settings": {
-            "slide_image": "shopify://shop_images/bg-hp-combo-cream.webp",
-            "slide_image_position": "0% 0%",
-            "title": "Feel Like Yourself Again.",
+            "slide_image": "shopify://shop_images/hp-hero-bliss-membership.webp",
+            "slide_image_position": "50% 50%",
+            "title": "Tired of Brain Fog, Fatigue, and Feeling \"Off\"?",
             "title_color": "#ffffff",
-            "description": "<p><strong>One Daily Cream. Three Bioidentical Hormones.</strong></p>\n<p>Support relief from hot flashes, poor sleep, brain fog, mood swings, anxiety, low libido, and stubborn weight gain.</p>\n<p>Use code <strong>COMBO</strong> at checkout. <em>Subscription required<em></em>.</em></p>",
+            "description": "Find relief from over 30 menopause and perimenopause symptoms with doctor-guided hormone therapy designed around your unique needs.",
             "description_color": "#ffffff",
             "show_first_button": true,
-            "first_button_text": "Shop Now",
-            "first_button_link": "https://shophormonebliss.com/discount/COMBO?redirect=%2Fproducts%2Fbioidentical-hormone-combo-cream-biest-progesterone-dhea",
-            "show_second_button": false,
-            "second_button_text": "SUBSCRIBE",
-            "second_button_link": ""
+            "first_button_text": "Take The First Step",
+            "first_button_link": "https://hormonebliss.com/free-consultation/",
+            "show_second_button": true,
+            "second_button_text": "Take The Quiz",
+            "second_button_link": "https://hormonebliss.com/about/is-it-your-hormones/"
           }
         }
       },
       "block_order": [
-        "slide_wXrNPt",
+        "slide_nJ3YDU",
         "slide_HKBJVz",
-        "slide_nJ3YDU"
+        "slide_wXrNPt"
       ],
       "name": "Hero",
       "settings": {
