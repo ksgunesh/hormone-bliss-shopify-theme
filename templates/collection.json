@@ -231,6 +231,32 @@
     "blocks_GPKDUU": {
       "type": "_blocks",
       "blocks": {
+        "text_GiXhDz": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<p>Other Categories</p>",
+            "width": "fit-content",
+            "max_width": "none",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 16,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
         "ai_gen_block_b9d7c16_rnhwXd": {
           "type": "ai_gen_block_b9d7c16",
           "settings": {
@@ -263,6 +289,7 @@
         }
       },
       "block_order": [
+        "text_GiXhDz",
         "ai_gen_block_b9d7c16_rnhwXd"
       ],
       "name": "Collections grid",
@@ -290,8 +317,8 @@
         "overlay_color": "#00000026",
         "overlay_style": "solid",
         "gradient_direction": "to top",
-        "padding-block-start": 0,
-        "padding-block-end": 0
+        "padding-block-start": 48,
+        "padding-block-end": 48
       }
     },
     "section_Gwc6Bz": {
