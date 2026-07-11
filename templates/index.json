@@ -28,22 +28,6 @@
             "second_button_link": ""
           }
         },
-        "slide_wXrNPt": {
-          "type": "slide",
-          "settings": {
-            "slide_image": "shopify://shop_images/hp-hero-bliss-membership.webp",
-            "title": "Tired of Brain Fog, Fatigue, and Feeling \"Off\"?",
-            "title_color": "#ffffff",
-            "description": "Find relief from over 30 menopause and perimenopause symptoms with doctor-guided hormone therapy designed around your unique needs.",
-            "description_color": "#ffffff",
-            "show_first_button": true,
-            "first_button_text": "Take The First Step",
-            "first_button_link": "https://hormonebliss.com/free-consultation/",
-            "show_second_button": true,
-            "second_button_text": "Take The Quiz",
-            "second_button_link": "https://hormonebliss.com/about/is-it-your-hormones/"
-          }
-        },
         "slide_HKBJVz": {
           "type": "slide",
           "settings": {
@@ -59,12 +43,28 @@
             "second_button_text": "Order Now",
             "second_button_link": ""
           }
+        },
+        "slide_wXrNPt": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify://shop_images/hp-hero-bliss-membership.webp",
+            "title": "Tired of Brain Fog, Fatigue, and Feeling \"Off\"?",
+            "title_color": "#ffffff",
+            "description": "Find relief from over 30 menopause and perimenopause symptoms with doctor-guided hormone therapy designed around your unique needs.",
+            "description_color": "#ffffff",
+            "show_first_button": true,
+            "first_button_text": "Take The First Step",
+            "first_button_link": "https://hormonebliss.com/free-consultation/",
+            "show_second_button": true,
+            "second_button_text": "Take The Quiz",
+            "second_button_link": "https://hormonebliss.com/about/is-it-your-hormones/"
+          }
         }
       },
       "block_order": [
         "slide_nJ3YDU",
-        "slide_wXrNPt",
-        "slide_HKBJVz"
+        "slide_HKBJVz",
+        "slide_wXrNPt"
       ],
       "name": "Hero",
       "settings": {
