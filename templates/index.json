@@ -12,6 +12,22 @@
     "image_content_slider_3qcgH8": {
       "type": "image-content-slider",
       "blocks": {
+        "slide_nJ3YDU": {
+          "type": "slide",
+          "settings": {
+            "slide_image": "shopify://shop_images/bg-hp-combo-cream.webp",
+            "title": "Feel Like Yourself Again.",
+            "title_color": "#ffffff",
+            "description": "<strong>One Daily Cream. Three Bioidentical Hormones. Real Results.</strong>\n\nHot flashes. Poor sleep. Mood swings. Anxiety. Brain fog. Low libido. Weight gain.\n\nOur Bioidentical Hormone Combo Cream combines BiEst, Progesterone, and DHEA into one easy-to-use daily cream designed to help support hormone balance and help you feel more like you again.\n\nUse code <strong>COMBO</strong> at checkout to receive your subscriber discount.",
+            "description_color": "#ffffff",
+            "show_first_button": true,
+            "first_button_text": "Shop Now",
+            "first_button_link": "https://shophormonebliss.com/discount/COMBO?redirect=%2Fproducts%2Fbioidentical-hormone-combo-cream-biest-progesterone-dhea",
+            "show_second_button": false,
+            "second_button_text": "SUBSCRIBE",
+            "second_button_link": ""
+          }
+        },
         "slide_wXrNPt": {
           "type": "slide",
           "settings": {
@@ -46,6 +62,7 @@
         }
       },
       "block_order": [
+        "slide_nJ3YDU",
         "slide_wXrNPt",
         "slide_HKBJVz"
       ],
