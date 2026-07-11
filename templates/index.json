@@ -244,6 +244,7 @@
         "button_7EmwmP": {
           "type": "button",
           "name": "t:names.button",
+          "disabled": true,
           "settings": {
             "label": "Restore My Hormones",
             "link": "https://hormonebliss.com/free-consultation/",
