@@ -120,8 +120,9 @@
         {% for block in section.blocks %}
             <div class="item" {{ block.shopify_attributes }}>
                 <div class="slide-image">
+                    {%- assign inline_style = 'object-position: ' | append: slide_image_position -%}
                     {% if block.settings.slide_image %}
-                        {{ block.settings.slide_image | image_url: width: 1500 | image_tag: loading: 'lazy', class: 'slide-img' }}
+                        {{ block.settings.slide_image | image_url: width: 1500 | image_tag: loading: 'lazy', class: 'slide-img', style: inline_style }}
                     {% else %}
                         {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
                     {% endif %}
