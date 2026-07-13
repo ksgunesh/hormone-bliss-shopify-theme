@@ -128,7 +128,7 @@
           "settings": {
             "text": "<p><strong>Discover how Bioidentical Hormone Replacement Therapy (BHRT) can help you reclaim your vitality and restore balance</strong>.</p><p>Our approach focuses on <strong>natural, personalized solutions</strong> that are <strong>life-changing and affordable</strong>, helping you <strong>address the root causes of hormone imbalance and feel like yourself again</strong>.</p>",
             "width": "fit-content",
-            "max_width": "none",
+            "max_width": "normal",
             "alignment": "left",
             "type_preset": "paragraph",
             "font": "var(--font-body--family)",
