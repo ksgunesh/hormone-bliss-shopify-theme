@@ -357,7 +357,7 @@
           "type": "button",
           "name": "t:names.button",
           "settings": {
-            "label": "Shop All Products Now",
+            "label": "Shop All Products",
             "link": "shopify://collections",
             "open_in_new_tab": false,
             "style_class": "button",
