@@ -14,6 +14,7 @@
       "blocks": {
         "slide_nJ3YDU": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "slide_image": "shopify://shop_images/bg-hp-combo-cream.webp",
             "slide_image_position": "0% 100%",
@@ -48,6 +49,7 @@
         },
         "slide_wXrNPt": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "slide_image": "shopify://shop_images/hp-hero-bliss-membership.webp",
             "slide_image_position": "50% 50%",
