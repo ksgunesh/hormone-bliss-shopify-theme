@@ -334,9 +334,14 @@
           "settings": {
             "collections": [
               "hormone-lab-testing-kits",
-              "combo-bioidentical-hormones",
               "hormone-creams",
-              "bioidentical-topical-hormone-creams"
+              "bioidentical-topical-hormone-creams",
+              "vitamins-supplements",
+              "collagen",
+              "active-lifestyle",
+              "fertility-bliss",
+              "books",
+              "carbmelt-health-detox-kits"
             ],
             "columns_desktop": 3,
             "columns_mobile": "1",
@@ -546,6 +551,7 @@
         "text_FJTdDM",
         "ai_gen_block_17111b6_feWTKp"
       ],
+      "disabled": true,
       "name": "What You Can Expect",
       "settings": {
         "content_direction": "column",
